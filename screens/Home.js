@@ -1,25 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { StyleSheet, Text, View, Image, FlatList, Alert, ActivityIndicator } from 'react-native';
 import { Card, FAB } from 'react-native-paper';
-import {useSelector,useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { Mycontext } from '../App'
 const Home = ({ navigation }) => {
 
     // const [data, setData] = useState([])
     // const [loading, setLoading] = useState(true)
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
 
-    const {data,loading} = useSelector((state)=>{
-        return state
-    })
+    // const {data,loading} = useSelector((state)=>{
+    //     return state
+    // })
+
+    const { state, dispatch } = useContext(Mycontext)
+    const {data,loading} = state
 
 
     fetchData = () => {
-        fetch("http://7646fef891b3.ngrok.io/")
+        fetch("http://15bf73f64f1f.ngrok.io/")
             .then(res => res.json())
             .then(results => {
-                dispatch({type:"ADD_DATA",payload:results})
-                dispatch({type:"SET_LOADING",payload:false})
+                dispatch({ type: "ADD_DATA", payload: results })
+                dispatch({ type: "SET_LOADING", payload: false })
                 // setData(results)
                 // setLoading(false)
             }).catch(err => {
